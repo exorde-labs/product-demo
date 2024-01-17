@@ -26,7 +26,7 @@ docker run -d -p 3000:3000 \
 Grafana is available at [http://localhost:3000](http://localhost:3000). The default username and password are both `admin`.
 
 **Note**: If you already have a Grafana instance, ensure that the [Word cloud](https://grafana.com/grafana/plugins/magnesium-wordcloud-panel/) and [JSON API
-](marcusolsson-json-datasource) plugins are installed.
+](https://grafana.com/grafana/plugins/marcusolsson-json-datasource/) plugins are installed.
 
 ### Connect Grafana to the Exorde API
 
@@ -52,12 +52,11 @@ Click on `Save & Test` to validate the connection.
 
 To import the dashboard:
 
-1. Copy the content of the dashboard at https://raw.githubusercontent.com/exorde-labs/product-demo/main/grafana/dashboard.json.
-2. Go to `Main menu` > `Dashboards` > `New` > `Import`.
-3. Paste the content of the dashboard in the `Import via dashboard JSON model` field.
-4. Click on `Load`.
-5. Select the `Exorde API` data source.
-6. Click on `Import`.
+1. Go to `Main menu` > `Dashboards` > `New` > `Import`.
+2. Paste the id of the dashboard in the `Grafana.com dashboard URL or ID` field: `20322`.
+3. Click on `Load`.
+4. Select the `Exorde API` data source.
+5. Click on `Import`.
 
 ## How to use the dashboard
 
