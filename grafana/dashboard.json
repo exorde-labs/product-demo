@@ -91,8 +91,8 @@
       },
       "description": "",
       "gridPos": {
-        "h": 5,
-        "w": 16,
+        "h": 4,
+        "w": 24,
         "x": 0,
         "y": 0
       },
@@ -140,7 +140,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 5
+        "y": 4
       },
       "id": 5,
       "options": {
@@ -328,9 +328,9 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 20,
         "x": 4,
-        "y": 5
+        "y": 4
       },
       "id": 2,
       "options": {
@@ -416,7 +416,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 9
+        "y": 8
       },
       "id": 6,
       "options": {
@@ -472,7 +472,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 13
+        "y": 12
       },
       "id": 3,
       "options": {
@@ -582,9 +582,9 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 20,
         "x": 4,
-        "y": 13
+        "y": 12
       },
       "id": 1,
       "options": {
@@ -682,7 +682,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           }
@@ -737,9 +738,9 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 16,
-        "x": 0,
-        "y": 21
+        "w": 20,
+        "x": 4,
+        "y": 20
       },
       "id": 4,
       "options": {
@@ -826,7 +827,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           }
@@ -835,9 +837,9 @@
       },
       "gridPos": {
         "h": 13,
-        "w": 16,
+        "w": 24,
         "x": 0,
-        "y": 29
+        "y": 28
       },
       "id": 8,
       "options": {
@@ -1156,6 +1158,6 @@
   "timezone": "",
   "title": "Exorde API Demo",
   "uid": "cc08deeb-afec-4e12-b7f5-a53ddf6e0dbc",
-  "version": 8,
+  "version": 9,
   "weekStart": ""
 }
