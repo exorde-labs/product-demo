@@ -360,12 +360,14 @@
             {
               "jsonPath": "$.items[*].postsCount",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].sentiment",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             }
           ],
           "hide": false,
@@ -615,7 +617,8 @@
             {
               "jsonPath": "$.items[*].postsCount",
               "language": "jsonpath",
-              "name": "postCount"
+              "name": "postCount",
+              "type": "number"
             }
           ],
           "method": "GET",
@@ -772,17 +775,20 @@
             {
               "jsonPath": "$.items[*].percentageNegativePosts",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].percentageNeutralPosts",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].percentagePositivePosts",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             }
           ],
           "method": "GET",
@@ -827,8 +833,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           }
@@ -872,132 +877,158 @@
             {
               "jsonPath": "$.items[*].emotions.admiration",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.anger",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.annoyance",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.approval",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.caring",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.confusion",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.curiosity",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.desire",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.disappointment",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.disapproval",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.disgust",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.embarrassment",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.excitement",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.fear",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.gratitude",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.grief",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.joy",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.love",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.nervousness",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.optimism",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.pride",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.realization",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.relief",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.remorse",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.sadness",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             },
             {
               "jsonPath": "$.items[*].emotions.surprise",
               "language": "jsonpath",
-              "name": ""
+              "name": "",
+              "type": "number"
             }
           ],
           "method": "GET",
@@ -1158,6 +1189,6 @@
   "timezone": "",
   "title": "Exorde API Demo",
   "uid": "cc08deeb-afec-4e12-b7f5-a53ddf6e0dbc",
-  "version": 9,
+  "version": 10,
   "weekStart": ""
 }
