@@ -1,0 +1,1161 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_EXORDE",
+      "label": "Exorde",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "marcusolsson-json-datasource",
+      "pluginName": "JSON API"
+    },
+    {
+      "name": "VAR_LIMIT",
+      "type": "constant",
+      "label": "Limit",
+      "value": "100",
+      "description": ""
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.2.2"
+    },
+    {
+      "type": "panel",
+      "id": "magnesium-wordcloud-panel",
+      "name": "Word cloud",
+      "version": "1.2.4"
+    },
+    {
+      "type": "datasource",
+      "id": "marcusolsson-json-datasource",
+      "name": "JSON API",
+      "version": "1.3.9"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "status-history",
+      "name": "Status history",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "text",
+      "name": "Text",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 2,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_EXORDE}"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 5,
+        "w": 16,
+        "x": 0,
+        "y": 0
+      },
+      "id": 9,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "This tool is a demonstration of how you can play with [Exorde API](https://docs.exorde.io) data in your internal dataviz tools.\n\nStart by typing the name of the topic you want to monitor in the search bar, then select it in the dropdown.\n\nNote: The API returns up to 100 data points. If you have only partial results, please reduce the granularity.",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.2.2",
+      "title": "Welcome to Exorde!",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_EXORDE}"
+      },
+      "description": "The volume of posts collected.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "continuous-RdYlGr"
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 5
+      },
+      "id": 5,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.2",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_EXORDE}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.volume.postsCount",
+              "language": "jsonpath",
+              "name": "postCount"
+            }
+          ],
+          "method": "GET",
+          "params": [
+            ["topicId", "${id}"],
+            ["startDate", "${__from:date:iso}"],
+            ["endDate", "${__to:date:iso}"]
+          ],
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/volume"
+        }
+      ],
+      "title": "Post volume",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_EXORDE}"
+      },
+      "description": "The sentiment (from -1 most negative to 1 most positive) and the volume of posts collected.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 3,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "postsCount"
+            },
+            "properties": [
+              {
+                "id": "custom.drawStyle",
+                "value": "bars"
+              },
+              {
+                "id": "min"
+              },
+              {
+                "id": "max"
+              },
+              {
+                "id": "custom.gradientMode",
+                "value": "opacity"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 100
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "Volume"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sentiment"
+            },
+            "properties": [
+              {
+                "id": "custom.drawStyle",
+                "value": "line"
+              },
+              {
+                "id": "custom.lineInterpolation",
+                "value": "smooth"
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 3
+              },
+              {
+                "id": "custom.gradientMode",
+                "value": "scheme"
+              },
+              {
+                "id": "min",
+                "value": -1
+              },
+              {
+                "id": "max",
+                "value": 1
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "Sentiment"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-RdYlGr"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 4,
+        "y": 5
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": ["variance", "mean", "min", "max"],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_EXORDE}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.items[*].startDate",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$.items[*].postsCount",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].sentiment",
+              "language": "jsonpath",
+              "name": ""
+            }
+          ],
+          "hide": false,
+          "method": "GET",
+          "params": [
+            ["limit", "${limit}"],
+            ["interval", "${interval}"],
+            ["topicId", "${id}"],
+            ["startDate", "${__from:date:iso}"],
+            ["endDate", "${__to:date:iso}"]
+          ],
+          "queryParams": "",
+          "refId": "B",
+          "urlPath": "/sentiment/history"
+        }
+      ],
+      "title": "Sentiment vs Volume",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_EXORDE}"
+      },
+      "description": "From -1 (negative) to 1 (positive).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "continuous-RdYlGr"
+          },
+          "mappings": [],
+          "max": 1,
+          "min": -1,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 9
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.2",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_EXORDE}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.sentiment.sentiment",
+              "language": "jsonpath",
+              "name": "postCount"
+            }
+          ],
+          "method": "GET",
+          "params": [
+            ["topicId", "${id}"],
+            ["startDate", "${__from:date:iso}"],
+            ["endDate", "${__to:date:iso}"]
+          ],
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/sentiment"
+        }
+      ],
+      "title": "Social sentiment",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_EXORDE}"
+      },
+      "description": "Most frequent keywords related to the selected topic.",
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 0,
+        "y": 13
+      },
+      "id": 3,
+      "options": {
+        "series_index": 0,
+        "wordCloudOptions": {
+          "deterministic": true,
+          "enableTooltip": true,
+          "fontFamily": "arial",
+          "fontSizes": [15, 80],
+          "padding": 1,
+          "rotationAngles": [0, 0],
+          "rotations": 2,
+          "scale": "sqrt",
+          "spiral": "archimedean",
+          "transitionDuration": 800
+        }
+      },
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_EXORDE}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.trendingKeywords.keywords[*].count"
+            },
+            {
+              "jsonPath": "$.trendingKeywords.keywords[*].label",
+              "language": "jsonpath",
+              "name": ""
+            }
+          ],
+          "method": "GET",
+          "params": [
+            ["limit", "10"],
+            ["topicId", "${id}"],
+            ["startDate", "${__from:date:iso}"],
+            ["endDate", "${__to:date:iso}"]
+          ],
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/keywords/trending"
+        }
+      ],
+      "title": "Trending keywords",
+      "transparent": true,
+      "type": "magnesium-wordcloud-panel"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_EXORDE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 100,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 0,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 4,
+        "y": 13
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": ["mean", "lastNotNull", "max", "min", "variance", "range"],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_EXORDE}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.items[*].startDate",
+              "name": "time",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$.items[*].postsCount",
+              "language": "jsonpath",
+              "name": "postCount"
+            }
+          ],
+          "method": "GET",
+          "params": [
+            ["limit", "${limit}"],
+            ["interval", "${interval}"],
+            ["topicId", "${id}"],
+            ["startDate", "${__from:date:iso}"],
+            ["endDate", "${__to:date:iso}"]
+          ],
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/volume/history"
+        }
+      ],
+      "title": "Volume",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_EXORDE}"
+      },
+      "description": "Get the proportion (in %) of positive and negative posts.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 25,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 3,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "percent"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "percentageNegativePosts"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "percentageNeutralPosts"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "percentagePositivePosts"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 16,
+        "x": 0,
+        "y": 21
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_EXORDE}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.items[*].startDate",
+              "language": "jsonpath",
+              "name": "",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$.items[*].percentageNegativePosts",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].percentageNeutralPosts",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].percentagePositivePosts",
+              "language": "jsonpath",
+              "name": ""
+            }
+          ],
+          "method": "GET",
+          "params": [
+            ["limit", "${limit}"],
+            ["interval", "${interval}"],
+            ["topicId", "${id}"],
+            ["startDate", "${__from:date:iso}"],
+            ["endDate", "${__to:date:iso}"]
+          ],
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/sentiment/history"
+        }
+      ],
+      "title": "Positive and negative posts",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "marcusolsson-json-datasource",
+        "uid": "${DS_EXORDE}"
+      },
+      "description": "General Emotion over time",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-blues"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 0
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 16,
+        "x": 0,
+        "y": 29
+      },
+      "id": 8,
+      "options": {
+        "colWidth": 0.9,
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "rowHeight": 0.9,
+        "showValue": "never",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_EXORDE}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$.items[*].startDate",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$.items[*].emotions.admiration",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.anger",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.annoyance",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.approval",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.caring",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.confusion",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.curiosity",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.desire",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.disappointment",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.disapproval",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.disgust",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.embarrassment",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.excitement",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.fear",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.gratitude",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.grief",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.joy",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.love",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.nervousness",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.optimism",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.pride",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.realization",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.relief",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.remorse",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.sadness",
+              "language": "jsonpath",
+              "name": ""
+            },
+            {
+              "jsonPath": "$.items[*].emotions.surprise",
+              "language": "jsonpath",
+              "name": ""
+            }
+          ],
+          "method": "GET",
+          "params": [
+            ["limit", "${limit}"],
+            ["interval", "${interval}"],
+            ["topicId", "${id}"],
+            ["startDate", "${__from:date:iso}"],
+            ["endDate", "${__to:date:iso}"]
+          ],
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": "/emotions/history"
+        }
+      ],
+      "title": "Emotions",
+      "type": "status-history"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {},
+        "description": "Type the name of a topic to search.",
+        "hide": 0,
+        "label": "1 - Enter the name of the topic to search",
+        "name": "name",
+        "options": [],
+        "query": "",
+        "skipUrlSync": false,
+        "type": "textbox"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "marcusolsson-json-datasource",
+          "uid": "${DS_EXORDE}"
+        },
+        "definition": "$.items[*].name",
+        "description": "Select the topic to show. Note: use the \"Name\" field to search topics.",
+        "hide": 0,
+        "includeAll": false,
+        "label": "2 - Select a Topic",
+        "multi": false,
+        "name": "id",
+        "options": [],
+        "query": {
+          "cacheDurationSeconds": 300,
+          "experimentalVariableTextField": "name",
+          "experimentalVariableValueField": "id",
+          "fields": [
+            {
+              "jsonPath": "$.items[*].name",
+              "name": "name"
+            },
+            {
+              "jsonPath": "$.items[*].id",
+              "language": "jsonpath",
+              "name": "id"
+            }
+          ],
+          "method": "GET",
+          "params": [
+            ["name", "${name}"],
+            ["limit", "100"]
+          ],
+          "queryParams": "",
+          "urlPath": "/topics"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "description": "Maximum number of data points to show.",
+        "hide": 2,
+        "label": "Limit",
+        "name": "limit",
+        "query": "${VAR_LIMIT}",
+        "skipUrlSync": false,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_LIMIT}",
+          "text": "${VAR_LIMIT}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_LIMIT}",
+            "text": "${VAR_LIMIT}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "5min",
+          "value": "5"
+        },
+        "description": "",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Data granularity",
+        "multi": false,
+        "name": "interval",
+        "options": [
+          {
+            "selected": true,
+            "text": "5min",
+            "value": "5"
+          },
+          {
+            "selected": false,
+            "text": "30min",
+            "value": "30"
+          },
+          {
+            "selected": false,
+            "text": "1 hour",
+            "value": "60"
+          },
+          {
+            "selected": false,
+            "text": "4 hours",
+            "value": "240"
+          },
+          {
+            "selected": false,
+            "text": "12 hours",
+            "value": "720"
+          },
+          {
+            "selected": false,
+            "text": "24 hours",
+            "value": "1440"
+          }
+        ],
+        "query": "5min : 5, 30min : 30, 1 hour : 60, 4 hours : 240, 12 hours : 720, 24 hours : 1440",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": false
+  },
+  "timezone": "",
+  "title": "Exorde API Demo",
+  "uid": "cc08deeb-afec-4e12-b7f5-a53ddf6e0dbc",
+  "version": 8,
+  "weekStart": ""
+}
