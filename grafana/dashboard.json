@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_EXORDE",
-      "label": "Exorde",
+      "name": "DS_EXORDE_API",
+      "label": "Exorde API",
       "description": "",
       "type": "datasource",
       "pluginId": "marcusolsson-json-datasource",
@@ -12,7 +12,7 @@
       "name": "VAR_LIMIT",
       "type": "constant",
       "label": "Limit",
-      "value": "100",
+      "value": "1000",
       "description": ""
     }
   ],
@@ -79,6 +79,7 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
+  "gnetId": 20322,
   "graphTooltip": 2,
   "id": null,
   "links": [],
@@ -87,7 +88,7 @@
     {
       "datasource": {
         "type": "marcusolsson-json-datasource",
-        "uid": "${DS_EXORDE}"
+        "uid": "${DS_EXORDE_API}"
       },
       "description": "",
       "gridPos": {
@@ -103,7 +104,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "This tool is a demonstration of how you can play with [Exorde API](https://docs.exorde.io) data in your internal dataviz tools.\n\nStart by typing the name of the topic you want to monitor in the search bar, then select it in the dropdown.\n\nNote: The API returns up to 100 data points. If you have only partial results, please reduce the granularity.",
+        "content": "This tool is a demonstration of how you can play with [Exorde API](https://docs.exorde.io) data in your internal dataviz tools.\n\nStart by typing the name of the topic you want to monitor in the search bar, then select it in the dropdown.\n\nNote: The API returns up to 1 000 data points. If you have only partial results, please reduce the granularity.",
         "mode": "markdown"
       },
       "pluginVersion": "10.2.2",
@@ -113,7 +114,7 @@
     {
       "datasource": {
         "type": "marcusolsson-json-datasource",
-        "uid": "${DS_EXORDE}"
+        "uid": "${DS_EXORDE_API}"
       },
       "description": "The volume of posts collected.",
       "fieldConfig": {
@@ -162,7 +163,7 @@
           "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
-            "uid": "${DS_EXORDE}"
+            "uid": "${DS_EXORDE_API}"
           },
           "fields": [
             {
@@ -189,7 +190,7 @@
     {
       "datasource": {
         "type": "marcusolsson-json-datasource",
-        "uid": "${DS_EXORDE}"
+        "uid": "${DS_EXORDE_API}"
       },
       "description": "The sentiment (from -1 most negative to 1 most positive) and the volume of posts collected.",
       "fieldConfig": {
@@ -350,7 +351,7 @@
           "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
-            "uid": "${DS_EXORDE}"
+            "uid": "${DS_EXORDE_API}"
           },
           "fields": [
             {
@@ -390,7 +391,7 @@
     {
       "datasource": {
         "type": "marcusolsson-json-datasource",
-        "uid": "${DS_EXORDE}"
+        "uid": "${DS_EXORDE_API}"
       },
       "description": "From -1 (negative) to 1 (positive).",
       "fieldConfig": {
@@ -440,7 +441,7 @@
           "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
-            "uid": "${DS_EXORDE}"
+            "uid": "${DS_EXORDE_API}"
           },
           "fields": [
             {
@@ -467,7 +468,7 @@
     {
       "datasource": {
         "type": "marcusolsson-json-datasource",
-        "uid": "${DS_EXORDE}"
+        "uid": "${DS_EXORDE_API}"
       },
       "description": "Most frequent keywords related to the selected topic.",
       "gridPos": {
@@ -497,7 +498,7 @@
           "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
-            "uid": "${DS_EXORDE}"
+            "uid": "${DS_EXORDE_API}"
           },
           "fields": [
             {
@@ -528,7 +529,7 @@
     {
       "datasource": {
         "type": "marcusolsson-json-datasource",
-        "uid": "${DS_EXORDE}"
+        "uid": "${DS_EXORDE_API}"
       },
       "fieldConfig": {
         "defaults": {
@@ -606,7 +607,7 @@
           "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
-            "uid": "${DS_EXORDE}"
+            "uid": "${DS_EXORDE_API}"
           },
           "fields": [
             {
@@ -640,7 +641,7 @@
     {
       "datasource": {
         "type": "marcusolsson-json-datasource",
-        "uid": "${DS_EXORDE}"
+        "uid": "${DS_EXORDE_API}"
       },
       "description": "Get the proportion (in %) of positive and negative posts.",
       "fieldConfig": {
@@ -763,7 +764,7 @@
           "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
-            "uid": "${DS_EXORDE}"
+            "uid": "${DS_EXORDE_API}"
           },
           "fields": [
             {
@@ -810,7 +811,7 @@
     {
       "datasource": {
         "type": "marcusolsson-json-datasource",
-        "uid": "${DS_EXORDE}"
+        "uid": "${DS_EXORDE_API}"
       },
       "description": "General Emotion over time",
       "fieldConfig": {
@@ -833,7 +834,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           }
@@ -867,7 +869,7 @@
           "cacheDurationSeconds": 300,
           "datasource": {
             "type": "marcusolsson-json-datasource",
-            "uid": "${DS_EXORDE}"
+            "uid": "${DS_EXORDE_API}"
           },
           "fields": [
             {
@@ -1048,8 +1050,8 @@
       "type": "status-history"
     }
   ],
-  "refresh": "",
-  "schemaVersion": 38,
+  "refresh": false,
+  "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": [
@@ -1068,7 +1070,7 @@
         "current": {},
         "datasource": {
           "type": "marcusolsson-json-datasource",
-          "uid": "${DS_EXORDE}"
+          "uid": "${DS_EXORDE_API}"
         },
         "definition": "$.items[*].name",
         "description": "Select the topic to show. Note: use the \"Name\" field to search topics.",
@@ -1129,53 +1131,75 @@
         ]
       },
       {
+        "auto": true,
+        "auto_count": 100,
+        "auto_min": "5m",
         "current": {
           "selected": false,
-          "text": "5min",
-          "value": "5"
+          "text": "auto",
+          "value": "$__auto_interval_interval"
         },
         "description": "",
         "hide": 0,
-        "includeAll": false,
         "label": "Data granularity",
-        "multi": false,
         "name": "interval",
         "options": [
           {
             "selected": true,
-            "text": "5min",
-            "value": "5"
+            "text": "auto",
+            "value": "$__auto_interval_interval"
           },
           {
             "selected": false,
-            "text": "30min",
-            "value": "30"
+            "text": "5m",
+            "value": "5m"
           },
           {
             "selected": false,
-            "text": "1 hour",
-            "value": "60"
+            "text": "30m",
+            "value": "30m"
           },
           {
             "selected": false,
-            "text": "4 hours",
-            "value": "240"
+            "text": "1h",
+            "value": "1h"
           },
           {
             "selected": false,
-            "text": "12 hours",
-            "value": "720"
+            "text": "4h",
+            "value": "4h"
           },
           {
             "selected": false,
-            "text": "24 hours",
-            "value": "1440"
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": false,
+            "text": "1d",
+            "value": "1d"
+          },
+          {
+            "selected": false,
+            "text": "7d",
+            "value": "7d"
+          },
+          {
+            "selected": false,
+            "text": "14d",
+            "value": "14d"
+          },
+          {
+            "selected": false,
+            "text": "30d",
+            "value": "30d"
           }
         ],
-        "query": "5min : 5, 30min : 30, 1 hour : 60, 4 hours : 240, 12 hours : 720, 24 hours : 1440",
+        "query": "5m,30m,1h,4h,12h,1d,7d,14d,30d",
         "queryValue": "",
+        "refresh": 2,
         "skipUrlSync": false,
-        "type": "custom"
+        "type": "interval"
       }
     ]
   },
@@ -1189,6 +1213,6 @@
   "timezone": "",
   "title": "Exorde API Demo",
   "uid": "cc08deeb-afec-4e12-b7f5-a53ddf6e0dbc",
-  "version": 10,
+  "version": 5,
   "weekStart": ""
 }

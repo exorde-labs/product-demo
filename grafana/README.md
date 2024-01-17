@@ -62,4 +62,4 @@ To import the dashboard:
 
 Start by typing the name of the topic you want to monitor in the search bar, then select it in the dropdown.
 
-**Note**: The API returns up to 100 data points. If you have only partial results, please reduce the granularity.
+**Note**: The API returns up to 1 000 data points. If you have only partial results, please reduce the granularity.
