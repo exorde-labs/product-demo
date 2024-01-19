@@ -874,163 +874,14 @@
           "fields": [
             {
               "jsonPath": "$.items[*].startDate",
+              "language": "jsonpath",
+              "name": "",
               "type": "time"
             },
             {
-              "jsonPath": "$.items[*].emotions.admiration",
+              "jsonPath": "$.items[*].emotions",
               "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.anger",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.annoyance",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.approval",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.caring",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.confusion",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.curiosity",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.desire",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.disappointment",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.disapproval",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.disgust",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.embarrassment",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.excitement",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.fear",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.gratitude",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.grief",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.joy",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.love",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.nervousness",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.optimism",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.pride",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.realization",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.relief",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.remorse",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.sadness",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
-            },
-            {
-              "jsonPath": "$.items[*].emotions.surprise",
-              "language": "jsonpath",
-              "name": "",
-              "type": "number"
+              "name": ""
             }
           ],
           "method": "GET",
@@ -1047,11 +898,33 @@
         }
       ],
       "title": "Emotions",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "format": "auto",
+            "keepTime": false,
+            "replace": false,
+            "source": "emotions"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "emotions": true,
+              "neutral": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
       "type": "status-history"
     }
   ],
   "refresh": false,
-  "schemaVersion": 39,
+  "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": [
@@ -1213,6 +1086,6 @@
   "timezone": "",
   "title": "Exorde API Demo",
   "uid": "cc08deeb-afec-4e12-b7f5-a53ddf6e0dbc",
-  "version": 5,
+  "version": 6,
   "weekStart": ""
 }
